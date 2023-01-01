@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
-import { IUserLogin } from "../../interfaces/users.interfaces";
+import { IUserLogin } from "../../interfaces/users";
 import { User } from "../../entities/user.entity";
-import { AppError } from "../../errors/AppError";
+import AppError from "../../errors/AppError";
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
