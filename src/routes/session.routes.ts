@@ -4,9 +4,6 @@ import { userLoginSerializer } from "../serializers/user.serializers";
 
 const sessionRoutes = Router();
 
-sessionRoutes.post(
-	"",
-	createSessionController
-);
+sessionRoutes.post("", createSessionController);
 
 export default sessionRoutes;

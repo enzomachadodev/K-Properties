@@ -1,6 +1,6 @@
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/user.entity";
-import { IUser, IUserUpdate } from "../../interfaces/users";
+import { IUser, IUserUpdate } from "../../interfaces/users.interfaces";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializers";
 
 const updateUserService = async (

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppDataSource from "../data-source";
-import { User } from "../entities/user.entity";
+import User from "../entities/user.entity";
 import AppError from "../errors/AppError";
 
 const ensureIsAdminMiddleware = async (
@@ -13,7 +13,7 @@ const ensureIsAdminMiddleware = async (
 	const userLogado = await userRepo.findOneBy({ id: req.user.id });
 
 	if (!userLogado?.isAdm) {
-		throw new AppError("unathorized", 403) ;
+		throw new AppError("unathorized", 403);
 	}
 	return next();
 };

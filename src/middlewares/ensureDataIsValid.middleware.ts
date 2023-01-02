@@ -1,22 +1,21 @@
-import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction } from "express";
 
-import {AnySchema} from 'yup'
-import AppError from '../errors/AppError'
+import { AnySchema } from "yup";
+import AppError from "../errors/AppError";
 
-const ensureDataIsValidMiddleware = (schema: AnySchema) => async(req: Request, res: Response, next: NextFunction) => {
+const ensureDataIsValidMiddleware =
+	(schema: AnySchema) =>
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const validatedData = await schema.validate(req.body, {
+				abortEarly: false,
+				stripUnknown: true,
+			});
+			req.body = validatedData;
+			return next();
+		} catch (error: any) {
+			throw new AppError(error.errors);
+		}
+	};
 
-    try {
-
-        const validatedData = await schema.validate(req.body, {
-            abortEarly: false,
-            stripUnknown: true
-        })
-        req.body = validatedData
-        return next()
-        
-    } catch (error: any) {
-        throw new AppError(error.errors)
-    }
-}
-
-export default ensureDataIsValidMiddleware
+export default ensureDataIsValidMiddleware;

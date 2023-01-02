@@ -1,5 +1,5 @@
 import AppDataSource from "../../data-source";
-import { User } from "../../entities/user.entity";
+import User from "../../entities/user.entity";
 import { listUsersWithoutPasswordSerializer } from "../../serializers/user.serializers";
 
 const listUsersService = async (): Promise<User[]> => {

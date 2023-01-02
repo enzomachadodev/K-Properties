@@ -1,11 +1,11 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 import { SchemaOf } from "yup";
 import {
 	IUser,
 	IUserLogin,
 	IUserRequest,
 	IUserUpdate,
-} from "../interfaces/users";
+} from "../interfaces/users.interfaces";
 
 const userLoginSerializer: SchemaOf<IUserLogin> = yup.object().shape({
 	email: yup.string().email().required(),
