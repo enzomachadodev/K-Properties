@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
-import { User } from "../../entities/user.entity";
+import User from "../../entities/user.entity";
 import { IUser, IUserRequest } from "../../interfaces/users.interfaces";
-import { userWithoutPasswordSerializer } from "../../serializers/user.serializers";
+import { userResponseSerializer } from "../../serializers/user.serializers";
 
 const createUserService = async (userData: IUserRequest): Promise<IUser> => {
 	const userRepository = AppDataSource.getRepository(User);
@@ -9,10 +9,9 @@ const createUserService = async (userData: IUserRequest): Promise<IUser> => {
 	const createdUser = userRepository.create(userData);
 	await userRepository.save(createdUser);
 
-	const createdUserWithoutPassword =
-		await userWithoutPasswordSerializer.validate(createdUser, {
-			stripUnknown: true,
-		});
+	const createdUserWithoutPassword = await userResponseSerializer.validate(createdUser, {
+		stripUnknown: true,
+	});
 
 	return createdUserWithoutPassword;
 };

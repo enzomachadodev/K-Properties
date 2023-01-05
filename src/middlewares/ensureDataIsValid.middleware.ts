@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-
 import { AnySchema } from "yup";
 import AppError from "../errors/AppError";
 
@@ -11,10 +10,11 @@ const ensureDataIsValidMiddleware =
 				abortEarly: false,
 				stripUnknown: true,
 			});
+
 			req.body = validatedData;
 			return next();
 		} catch (error: any) {
-			throw new AppError(error.errors);
+			throw new AppError(error.errors, 400);
 		}
 	};
 
