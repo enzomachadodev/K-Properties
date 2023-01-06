@@ -9,9 +9,16 @@ import "dotenv/config";
 const createSessionService = async ({ email, password }: IUserLogin): Promise<string> => {
 	const userRepository = AppDataSource.getRepository(User);
 
-	const user = await userRepository.findOneBy({
-		email: email,
+	const user = await userRepository.findOne({
+		where: [
+			{
+				email: email,
+			},
+		],
+		withDeleted: true,
 	});
+
+	console.log("@@@@@@@@@@@@@@@@@@", user);
 
 	if (!user) {
 		throw new AppError("User or password invalid!", 403);

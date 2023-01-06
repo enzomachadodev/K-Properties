@@ -13,6 +13,7 @@ const listPropertiesService = async () => {
 
 	const listPropertiesResponse = properties.map((e) => {
 		return {
+			id: e.id,
 			sold: e.sold,
 			value: e.value,
 			size: e.size,

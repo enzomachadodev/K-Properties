@@ -18,7 +18,7 @@ categoryRoutes.post(
 	ensureDataIsValidMiddleware(categoryRequestSerializer),
 	createCategoryController
 );
-categoryRoutes.get("", ensureAuthMiddleware, listCategoriesController);
-categoryRoutes.get("/:id/properties", ensureAuthMiddleware, listPropertyByCategoryController);
+categoryRoutes.get("", listCategoriesController);
+categoryRoutes.get("/:id/properties", listPropertyByCategoryController);
 
 export default categoryRoutes;

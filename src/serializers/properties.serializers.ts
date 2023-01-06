@@ -10,6 +10,20 @@ export const addressRequestSerializer: SchemaOf<IAddressRequest> = yup.object().
 	state: yup.string().max(2).required(),
 });
 
+export const propertyRequestSerializer: SchemaOf<IPropertyRequest> = yup.object().shape({
+	value: yup.number().required(),
+	size: yup.number().required(),
+	address: yup.object().shape({
+		id: yup.string().required(),
+		district: yup.string().required(),
+		zipCode: yup.string().max(8).required(),
+		number: yup.string().notRequired(),
+		city: yup.string().required(),
+		state: yup.string().max(2).required(),
+	}),
+	categoryId: yup.string().required(),
+});
+
 export const propertyResponseSerializer: SchemaOf<IPropertyRequest> = yup.object().shape({
 	value: yup.number().required(),
 	size: yup.number().required(),

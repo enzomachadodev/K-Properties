@@ -19,7 +19,7 @@ const createPropertiesService = async ({
 	const findCategory = await categoriesRepository.findOneBy({ id: categoryId });
 
 	if (!findCategory) {
-		throw new AppError("this category not exists", 401);
+		throw new AppError("this category not exists", 404);
 	}
 
 	const findAddress = await addressesRepository.findOne({
@@ -59,6 +59,7 @@ const createPropertiesService = async ({
 	await propertiesRepository.save(newProperty);
 
 	const propertyResponse = {
+		id: newProperty.id,
 		sold: newProperty.sold,
 		value: newProperty.value,
 		size: newProperty.size,
@@ -68,7 +69,11 @@ const createPropertiesService = async ({
 		categoryId: newProperty.category.id,
 	};
 
-	return propertyResponse;
+	const propertyResponseValidated = await propertyResponseSerializer.validate(propertyResponse, {
+		stripUnknown: true,
+	});
+
+	return propertyResponseValidated;
 };
 
 export default createPropertiesService;
