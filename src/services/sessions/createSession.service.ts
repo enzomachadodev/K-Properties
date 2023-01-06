@@ -6,10 +6,7 @@ import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const createSessionService = async ({
-	email,
-	password,
-}: IUserLogin): Promise<string> => {
+const createSessionService = async ({ email, password }: IUserLogin): Promise<string> => {
 	const userRepository = AppDataSource.getRepository(User);
 
 	const user = await userRepository.findOneBy({
@@ -18,6 +15,10 @@ const createSessionService = async ({
 
 	if (!user) {
 		throw new AppError("User or password invalid!", 403);
+	}
+
+	if (!user.isActive) {
+		throw new AppError("User is not active!", 403);
 	}
 
 	const passwordMatch = await compare(password, user.password);

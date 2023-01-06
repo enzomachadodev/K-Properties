@@ -3,8 +3,7 @@ import { AnySchema } from "yup";
 import AppError from "../errors/AppError";
 
 const ensureDataIsValidMiddleware =
-	(schema: AnySchema) =>
-	async (req: Request, res: Response, next: NextFunction) => {
+	(schema: AnySchema) => async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const validatedData = await schema.validate(req.body, {
 				abortEarly: false,

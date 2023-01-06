@@ -3,7 +3,18 @@ import createPropertiesService from "../services/properties/createProperties.ser
 import listPropertiesService from "../services/properties/listProperties.service";
 
 export const createPropertiesController = async (req: Request, res: Response) => {
-	const newProperty = await createPropertiesService(req.body, req.body.address);
+	const {
+		value,
+		size,
+		address: { district, zipCode, number, city, state },
+		categoryId,
+	} = req.body;
+	const newProperty = await createPropertiesService({
+		value,
+		size,
+		address: { district, zipCode, number, city, state },
+		categoryId,
+	});
 	return res.status(201).json(newProperty);
 };
 

@@ -2,11 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import AppError from "../errors/AppError";
 
-const ensureAuthMiddleware = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+const ensureAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 	let token = req.headers.authorization;
 
 	if (!token) {

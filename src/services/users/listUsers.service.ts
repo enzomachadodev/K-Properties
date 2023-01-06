@@ -1,19 +1,17 @@
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
+import { listUserResponseSerializer } from "../../serializers/user.serializers";
 
-const listUsersService = async (): Promise<User[]> => {
+const listUsersService = async () => {
 	const userRepository = AppDataSource.getRepository(User);
 
 	const users = await userRepository.find();
 
-	// const listUsersWithoutPassword =
-	// 	await listUsersWithoutPasswordSerializer.validate(users, {
-	// 		stripUnknown: true,
-	// 	});
+	const usersListValidated = await listUserResponseSerializer.validate(users, {
+		stripUnknown: true,
+	});
 
-	// return listUsersWithoutPassword;
-
-	return users;
+	return usersListValidated;
 };
 
 export default listUsersService;

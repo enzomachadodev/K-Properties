@@ -6,7 +6,7 @@ const ensureIsAdminMiddleware = async (req: Request, res: Response, next: NextFu
 		return next();
 	}
 
-	throw new AppError("unathorized!", 401);
+	throw new AppError("unathorized!", 403);
 };
 
 export default ensureIsAdminMiddleware;

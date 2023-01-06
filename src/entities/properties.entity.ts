@@ -34,11 +34,11 @@ class Property {
 	@UpdateDateColumn()
 	updatedAt: Date;
 
-	@OneToOne(() => Addresses, (addresses) => addresses.property)
+	@OneToOne(() => Addresses)
 	@JoinColumn()
 	address: Addresses;
 
-	@ManyToOne(() => Categories)
+	@ManyToOne(() => Categories, (Categories) => Categories)
 	@JoinColumn()
 	category: Categories;
 

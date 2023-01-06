@@ -3,37 +3,72 @@ import Property from "../../entities/properties.entity";
 import Addresses from "../../entities/addresses.entity";
 import { IAddressRequest, IPropertyRequest } from "../../interfaces/properties.intefaces";
 import AppError from "../../errors/AppError";
+import Categories from "../../entities/categories.entity";
+import { propertyResponseSerializer } from "../../serializers/properties.serializers";
 
-const createPropertiesService = async (
-	propertyData: IPropertyRequest,
-	addressData: IAddressRequest
-) => {
+const createPropertiesService = async ({
+	value,
+	size,
+	address: { district, zipCode, number, city, state },
+	categoryId,
+}: IPropertyRequest) => {
 	const addressesRepository = AppDataSource.getRepository(Addresses);
 	const propertiesRepository = AppDataSource.getRepository(Property);
+	const categoriesRepository = AppDataSource.getRepository(Categories);
 
-	const addressesExists = await addressesRepository
-		.createQueryBuilder("addresses")
-		.where(
-			"addresses.district = :district AND addresses.zipCode = :zipCode AND addresses.number = :number AND addresses.city = :city AND addresses.state = :state",
-			{
-				district: propertyData.address.district,
-				zipCode: propertyData.address.zipCode,
-				number: propertyData.address.number,
-				city: propertyData.address.city,
-				state: propertyData.address.state,
-			}
-		)
-		.getOne();
+	const findCategory = await categoriesRepository.findOneBy({ id: categoryId });
 
-	console.log("\n @@@@@@@@@@@@@@@@@@@@@@@@@@ \n", addressesExists);
-
-	if (addressesExists) {
-		throw new AppError("Addresses already exists", 409);
+	if (!findCategory) {
+		throw new AppError("this category not exists", 401);
 	}
 
-	const newAddress = addressesRepository.create(addressData);
+	const findAddress = await addressesRepository.findOne({
+		where: [
+			{
+				district: district,
+				zipCode: zipCode,
+				number: number,
+				city: city,
+				state: state,
+			},
+		],
+	});
 
-	return addressesExists;
+	if (findAddress) {
+		throw new AppError("this addresses already exists", 409);
+	}
+
+	const newAddress = addressesRepository.create({
+		district,
+		zipCode,
+		number,
+		city,
+		state,
+	});
+
+	await addressesRepository.save(newAddress);
+
+	const newProperty = propertiesRepository.create({
+		value,
+		size,
+		address: newAddress,
+		category: findCategory,
+	});
+	console.log("\n @@@@@@@@@@@@@@@@@@@@@", newProperty);
+
+	await propertiesRepository.save(newProperty);
+
+	const propertyResponse = {
+		sold: newProperty.sold,
+		value: newProperty.value,
+		size: newProperty.size,
+		createdAt: newProperty.createdAt,
+		updatedAt: newProperty.updatedAt,
+		address: newProperty.address,
+		categoryId: newProperty.category.id,
+	};
+
+	return propertyResponse;
 };
 
 export default createPropertiesService;
