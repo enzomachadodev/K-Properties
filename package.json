@@ -2,25 +2,39 @@
   "name": "sprint5",
   "version": "1.0.0",
   "main": "index.ts",
-  "author": "Felipe <felipe.silva@kenzie.com.br>",
+  "author": "Enzo <enzomachadodev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/server.js",
+    "start:dev": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/server.ts' -e ts",
+    "migration:generate": "npx typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
+    "migration:run": "npx typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose --runInBand"
+    "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose --runInBand --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:push": "yarn test --coverage"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.4",
+    "@types/node": "^20.10.3",
+    "@types/nodemon": "^1.19.6",
     "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
     "jest": "^28.1.2",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.0.3",
     "sqlite3": "^5.0.8",
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.5",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.7.4",
-    "yup": "^0.32.11"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "@babel/core": "^7.20.7",
@@ -35,6 +49,7 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.17",
+    "zod": "^3.22.4"
   }
 }
