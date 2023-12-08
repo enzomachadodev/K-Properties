@@ -1,4 +1,4 @@
-export interface IAddressRequest {
+export interface IAddressCreate {
 	district: string;
 	zipCode: string;
 	number?: string;
@@ -6,9 +6,10 @@ export interface IAddressRequest {
 	state: string;
 }
 
-export interface IPropertyRequest {
+export interface IPropertyCreate {
 	value: number;
 	size: number;
-	address: IAddressRequest;
+	address: IAddressCreate;
 	categoryId: string;
 }
+

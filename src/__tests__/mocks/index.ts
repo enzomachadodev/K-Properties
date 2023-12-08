@@ -1,37 +1,38 @@
-import { IUserLogin, IUserRequest } from "../../interfaces/users.interfaces";
-import { IScheduleRequest } from "../../interfaces/schedules.interfaces";
-import { IPropertyRequest } from "../../interfaces/properties.intefaces";
-import { ICategoryRequest } from "../../interfaces/categories.interfaces";
+import { ICategoryCreate } from "@/interfaces/categories.interfaces";
+import { IUserCreate } from "../../interfaces/users.interfaces";
+import { ISessionCreate } from "@/interfaces/session.interfaces";
+import { IPropertyCreate } from "@/interfaces/properties.intefaces";
+import { IScheduleCreate } from "@/interfaces/schedules.interfaces";
 
-export const mockedUser: IUserRequest = {
+export const mockedUser: IUserCreate = {
 	name: "Joana",
 	email: "joana@mail.com",
 	isAdm: false,
 	password: "123456",
 };
 
-export const mockedAdmin: IUserRequest = {
+export const mockedAdmin: IUserCreate = {
 	name: "Felipe",
 	email: "felipe@mail.com",
 	isAdm: true,
 	password: "123456",
 };
 
-export const mockedUserLogin: IUserLogin = {
+export const mockedUserLogin: ISessionCreate = {
 	email: "joana@mail.com",
 	password: "123456",
 };
 
-export const mockedAdminLogin: IUserLogin = {
+export const mockedAdminLogin: ISessionCreate = {
 	email: "felipe@mail.com",
 	password: "123456",
 };
 
-export const mockedCategory: ICategoryRequest = {
+export const mockedCategory: ICategoryCreate = {
 	name: "Apartamento",
 };
 
-export const mockedProperty: IPropertyRequest = {
+export const mockedProperty: IPropertyCreate = {
 	size: 350,
 	value: 10000000,
 	address: {
@@ -44,7 +45,7 @@ export const mockedProperty: IPropertyRequest = {
 	categoryId: "",
 };
 
-export const mockedProperty2: IPropertyRequest = {
+export const mockedProperty2: IPropertyCreate = {
 	size: 350,
 	value: 10000000,
 	address: {
@@ -57,7 +58,7 @@ export const mockedProperty2: IPropertyRequest = {
 	categoryId: "",
 };
 
-export const mockedPropertyInvalidZipCode: IPropertyRequest = {
+export const mockedPropertyInvalidZipCode: IPropertyCreate = {
 	size: 350,
 	value: 10000000,
 	address: {
@@ -70,7 +71,7 @@ export const mockedPropertyInvalidZipCode: IPropertyRequest = {
 	categoryId: "",
 };
 
-export const mockedPropertyInvalidState: IPropertyRequest = {
+export const mockedPropertyInvalidState: IPropertyCreate = {
 	size: 350,
 	value: 10000000,
 	address: {
@@ -83,7 +84,7 @@ export const mockedPropertyInvalidState: IPropertyRequest = {
 	categoryId: "",
 };
 
-export const mockedPropertyInvalidCategoryId: IPropertyRequest = {
+export const mockedPropertyInvalidCategoryId: IPropertyCreate = {
 	size: 350,
 	value: 10000000,
 	address: {
@@ -96,37 +97,38 @@ export const mockedPropertyInvalidCategoryId: IPropertyRequest = {
 	categoryId: "8f9ae6ce-e36c-4d9d-9bd7-b4c98cb4e4f4",
 };
 
-export const mockedSchedule: IScheduleRequest = {
+export const mockedSchedule: IScheduleCreate = {
 	date: "2022/08/12",
 	hour: "10:30",
 	propertyId: "",
 	userId: "",
 };
 
-export const mockedScheduleInvalidPropertyId: IScheduleRequest = {
+export const mockedScheduleInvalidPropertyId: IScheduleCreate = {
 	date: "2022/08/12",
 	hour: "10:30",
 	propertyId: "b855d86b-d4c9-41cd-ab98-d7fa734c6ce4",
 	userId: "",
 };
 
-export const mockedScheduleInvalidDate: IScheduleRequest = {
+export const mockedScheduleInvalidDate: IScheduleCreate = {
 	date: "2022/08/20",
 	hour: "10:30",
 	propertyId: "",
 	userId: "",
 };
 
-export const mockedScheduleInvalidHourLess8: IScheduleRequest = {
+export const mockedScheduleInvalidHourLess8: IScheduleCreate = {
 	date: "2022/08/17",
 	hour: "5:30",
 	propertyId: "",
 	userId: "",
 };
 
-export const mockedScheduleInvalidHourMore18: IScheduleRequest = {
+export const mockedScheduleInvalidHourMore18: IScheduleCreate = {
 	date: "2022/08/17",
 	hour: "18:30",
 	propertyId: "",
 	userId: "",
 };
+
