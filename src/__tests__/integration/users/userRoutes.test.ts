@@ -184,7 +184,7 @@ describe("/users", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("PATCH /users/:id - should not be able to update user with invalid id", async () => {
+  test("PATCH /users/:id - should not be able to update user with invalid id", async () => {
     const newValues = { name: "Joana Brito", email: "joanabrito@mail.com" }
 
     const admingLoginResponse = await request(app)
