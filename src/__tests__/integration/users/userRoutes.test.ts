@@ -118,7 +118,7 @@ describe("/users", () => {
     expect(response.status).toBe(403)
   })
 
-  test.skip("DELETE /users/:id -  Must be able to soft delete user", async () => {
+  test("DELETE /users/:id -  Must be able to soft delete user", async () => {
     await request(app).post("/users").send(mockedAdmin)
 
     const adminLoginResponse = await request(app)
