@@ -169,7 +169,7 @@ describe("/users", () => {
     expect(response.body).toHaveProperty("message")
   })
 
-  test.skip("PATCH /users/:id -  should not be able to update user without authentication", async () => {
+  test("PATCH /users/:id -  should not be able to update user without authentication", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
