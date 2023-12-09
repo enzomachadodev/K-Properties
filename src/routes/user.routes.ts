@@ -24,7 +24,12 @@ userRoutes.get(
   verifyAdminMiddleware,
   userController.read,
 );
-userRoutes.patch("/:id", verifyAuthMiddleware, userController.update);
+userRoutes.patch(
+  "/:id",
+  verifyAuthMiddleware,
+  verifyUserExistsMiddleware,
+  userController.update,
+);
 userRoutes.delete(
   "/:id",
   verifyAuthMiddleware,
