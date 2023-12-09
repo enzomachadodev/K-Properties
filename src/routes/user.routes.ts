@@ -1,37 +1,28 @@
 import { Router } from "express";
+import { userController } from "@/controllers";
 import {
-	createUserController,
-	deleteUserController,
-	listUsersController,
-	updateUserController,
-} from "../controllers/users.controllers";
-import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
-import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
-import ensureIsAdminMiddleware from "../middlewares/ensureIsAdmin.middleware";
-import ensureUserExistsMiddleware from "../middlewares/ensureUserExists.middleware";
-import ensureUserIsActiveMiddleware from "../middlewares/ensureUserIsActive.middleware";
-import { userRequestSerializer } from "../serializers/user.serializers";
+  verifyAdminMiddleware,
+  verifyAuthMiddleware,
+  verifyBodyMiddleware,
+  verifyUserEmailMiddleware,
+} from "@/middlewares";
+import { userCreateSchema } from "@/schemas/user.schema";
 
 const userRoutes = Router();
 
-userRoutes.post("", ensureDataIsValidMiddleware(userRequestSerializer), createUserController);
-
-userRoutes.get("", ensureAuthMiddleware, ensureIsAdminMiddleware, listUsersController);
-
-userRoutes.patch(
-	"/:id",
-	ensureAuthMiddleware,
-	ensureUserExistsMiddleware,
-	ensureUserIsActiveMiddleware,
-	updateUserController
+userRoutes.post(
+  "",
+  verifyBodyMiddleware(userCreateSchema),
+  verifyUserEmailMiddleware,
+  userController.create,
 );
-userRoutes.delete(
-	"/:id",
-	ensureAuthMiddleware,
-	ensureIsAdminMiddleware,
-	ensureUserExistsMiddleware,
-	ensureUserIsActiveMiddleware,
-	deleteUserController
+userRoutes.get(
+  "",
+  verifyAuthMiddleware,
+  verifyAdminMiddleware,
+  userController.read,
 );
+userRoutes.patch("/:id", userController.update);
+userRoutes.delete("/:id", userController.destroy);
 
 export default userRoutes;
