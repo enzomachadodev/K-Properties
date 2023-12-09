@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { userController } from "@/controllers";
 import {
+  verifyUserExistsMiddleware,
+  verifyUserIsActiveMiddleware,
   verifyAdminMiddleware,
   verifyAuthMiddleware,
   verifyBodyMiddleware,
@@ -27,6 +29,8 @@ userRoutes.delete(
   "/:id",
   verifyAuthMiddleware,
   verifyAdminMiddleware,
+  verifyUserExistsMiddleware,
+  verifyUserIsActiveMiddleware,
   userController.destroy,
 );
 
