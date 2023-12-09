@@ -23,6 +23,11 @@ userRoutes.get(
   userController.read,
 );
 userRoutes.patch("/:id", userController.update);
-userRoutes.delete("/:id", verifyAuthMiddleware, userController.destroy);
+userRoutes.delete(
+  "/:id",
+  verifyAuthMiddleware,
+  verifyAdminMiddleware,
+  userController.destroy,
+);
 
 export default userRoutes;
