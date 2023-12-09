@@ -138,7 +138,7 @@ describe("/users", () => {
     expect(findUser.body[0].isActive).toBe(false)
   })
 
-  test.skip("DELETE /users/:id -  shouldn't be able to delete user with isActive = false", async () => {
+  test("DELETE /users/:id -  shouldn't be able to delete user with isActive = false", async () => {
     await request(app).post("/users").send(mockedAdmin)
 
     const adminLoginResponse = await request(app)
