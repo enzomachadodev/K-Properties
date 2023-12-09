@@ -1,12 +1,15 @@
+import express from "express";
 import "reflect-metadata";
 import "express-async-errors";
-import express from "express";
-import userRoutes from "./routes/user.routes";
-import sessionRoutes from "./routes/session.routes";
-import handleError from "./errors/handleError";
-import categoryRoutes from "./routes/categories.routes";
-import propertyRoutes from "./routes/properties.routes";
-import scheduleRoutes from "./routes/schedules.routes";
+
+import {
+  userRoutes,
+  categoryRoutes,
+  propertyRoutes,
+  scheduleRoutes,
+  sessionRoutes,
+} from "./routes";
+import { handleError } from "./middlewares";
 
 const app = express();
 app.use(express.json());
