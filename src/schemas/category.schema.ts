@@ -1,6 +1,5 @@
 import { z } from "zod";
 
 export const categoryCreateSchema = z.object({
-	name: z.string(),
+  name: z.string(),
 });
-
