@@ -155,7 +155,7 @@ describe("/users", () => {
     expect(response.body).toHaveProperty("message")
   })
 
-  test.skip("DELETE /users/:id -  should not be able to delete user with invalid id", async () => {
+  test("DELETE /users/:id -  should not be able to delete user with invalid id", async () => {
     await request(app).post("/users").send(mockedAdmin)
 
     const adminLoginResponse = await request(app)
