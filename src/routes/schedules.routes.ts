@@ -1,10 +1,9 @@
+import { scheduleController } from "@/controllers";
 import { Router } from "express";
-import { createSchedulesController } from "../controllers/schedules.controller";
-import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
 
 const scheduleRoutes = Router();
 
-scheduleRoutes.post("", ensureAuthMiddleware, createSchedulesController);
-scheduleRoutes.get("/properties/:id");
+scheduleRoutes.post("", scheduleController.create);
+scheduleRoutes.get("/property/:id", scheduleController.readByPropertyId);
 
 export default scheduleRoutes;
