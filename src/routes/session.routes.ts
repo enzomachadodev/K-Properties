@@ -1,10 +1,14 @@
 import { Router } from "express";
-import { createSessionController } from "../controllers/session.controller";
-import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
-import { userLoginSerializer } from "../serializers/user.serializers";
+import { sessionController } from "@/controllers";
+import { verifyBodyMiddleware } from "@/middlewares";
+import { sessionCreateSchema } from "@/schemas/session.schema";
 
 const sessionRoutes = Router();
 
-sessionRoutes.post("", ensureDataIsValidMiddleware(userLoginSerializer), createSessionController);
+sessionRoutes.post(
+  "",
+  verifyBodyMiddleware(sessionCreateSchema),
+  sessionController.create,
+);
 
 export default sessionRoutes;
