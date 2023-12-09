@@ -1,22 +1,10 @@
 import { Router } from "express";
-import {
-	createPropertiesController,
-	listPropertiesController,
-} from "../controllers/properties.controllers";
-import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
-import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
-import ensureIsAdminMiddleware from "../middlewares/ensureIsAdmin.middleware";
-import { propertyRequestSerializer } from "../serializers/properties.serializers";
+import { propertyController } from "@/controllers";
 
 const propertyRoutes = Router();
 
-propertyRoutes.post(
-	"",
-	ensureAuthMiddleware,
-	ensureIsAdminMiddleware,
-	ensureDataIsValidMiddleware(propertyRequestSerializer),
-	createPropertiesController
-);
-propertyRoutes.get("", ensureAuthMiddleware, listPropertiesController);
+propertyRoutes.post("", propertyController.create);
+propertyRoutes.get("", propertyController.read);
+propertyRoutes.get("/category/:id", propertyController.readByCategoryId);
 
 export default propertyRoutes;
