@@ -192,11 +192,6 @@ describe("/users", () => {
       .send(mockedAdminLogin)
     const token = `Bearer ${admingLoginResponse.body.token}`
 
-    // const userTobeUpdateRequest = await request(app)
-    // 	.get("/users")
-    // 	.set("Authorization", token);
-    //const userTobeUpdateId = userTobeUpdateRequest.body[0].id;
-
     const response = await request(app)
       .patch(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`)
       .set("Authorization", token)
@@ -206,7 +201,7 @@ describe("/users", () => {
     expect(response.status).toBe(404)
   })
 
-  test.skip("PATCH /users/:id - should not be able to update isAdm field value", async () => {
+  test("PATCH /users/:id - should not be able to update isAdm field value", async () => {
     const newValues = { isAdm: false }
 
     const admingLoginResponse = await request(app)
@@ -228,7 +223,7 @@ describe("/users", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("PATCH /users/:id - should not be able to update isActive field value", async () => {
+  test("PATCH /users/:id - should not be able to update isActive field value", async () => {
     const newValues = { isActive: false }
 
     const admingLoginResponse = await request(app)
@@ -249,7 +244,7 @@ describe("/users", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("PATCH /users/:id - should not be able to update id field value", async () => {
+  test("PATCH /users/:id - should not be able to update id field value", async () => {
     const newValues = { id: false }
 
     const admingLoginResponse = await request(app)
