@@ -19,10 +19,6 @@ const userCreateSchema = z.object({
   isAdm: z.boolean(),
 });
 
-const userUpdateSchema = z.object({
-  email: z.string().email().optional(),
-  name: z.string().optional(),
-  password: z.string().optional(),
-});
+const userUpdateSchema = userCreateSchema.omit({ isAdm: true }).partial();
 
 export { userSchema, userCreateSchema, loadUsersSchema, userUpdateSchema };

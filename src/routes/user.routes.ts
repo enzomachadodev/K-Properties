@@ -8,7 +8,7 @@ import {
   verifyBodyMiddleware,
   verifyUserEmailMiddleware,
 } from "@/middlewares";
-import { userCreateSchema } from "@/schemas/user.schema";
+import { userCreateSchema, userUpdateSchema } from "@/schemas/user.schema";
 
 const userRoutes = Router();
 
@@ -28,6 +28,7 @@ userRoutes.patch(
   "/:id",
   verifyAuthMiddleware,
   verifyUserExistsMiddleware,
+  verifyBodyMiddleware(userUpdateSchema),
   userController.update,
 );
 userRoutes.delete(

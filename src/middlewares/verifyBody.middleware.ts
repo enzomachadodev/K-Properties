@@ -1,17 +1,23 @@
 import { AppError } from "@/errors/AppError";
 import { NextFunction, Request, Response } from "express";
-import { ZodTypeAny } from "zod";
+import { AnyZodObject, ZodError } from "zod";
 
 const verifyBodyMiddleware =
-  (schema: ZodTypeAny) =>
-  (req: Request, res: Response, next: NextFunction): void => {
+  (schema: AnyZodObject) =>
+  (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = schema.parse(req.body);
-      req.body = validatedData;
-      return next();
-    } catch (error: any) {
-      throw new AppError(error.errors, 400);
+      schema.parse(req.body);
+    } catch (error) {
+      if (error instanceof ZodError)
+        return res.status(400).json({ message: error.flatten().fieldErrors });
     }
+    const hasExtraFields = Object.keys(req.body).some(
+      (field) => !schema.shape[field],
+    );
+    if (hasExtraFields)
+      throw new AppError("unexpected fields in the request body", 401);
+
+    return next();
   };
 
 export default verifyBodyMiddleware;
