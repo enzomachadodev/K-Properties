@@ -99,7 +99,7 @@ describe("/users", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("DELETE /users/:id -  should not be able to delete user not being admin", async () => {
+  test("DELETE /users/:id -  should not be able to delete user not being admin", async () => {
     const userLoginResponse = await request(app)
       .post("/login")
       .send(mockedUserLogin)
