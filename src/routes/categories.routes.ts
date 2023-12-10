@@ -1,11 +1,15 @@
 import { categoryController } from "@/controllers";
-import { verifyCategoryNameMiddleware } from "@/middlewares";
+import {
+  verifyAuthMiddleware,
+  verifyCategoryNameMiddleware,
+} from "@/middlewares";
 import { Router } from "express";
 
 const categoryRoutes = Router();
 
 categoryRoutes.post(
   "",
+  verifyAuthMiddleware,
   verifyCategoryNameMiddleware,
   categoryController.create,
 );
