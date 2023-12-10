@@ -278,7 +278,6 @@ describe("/users", () => {
       .patch(`/users/${userTobeUpdateId}`)
       .set("Authorization", userToken)
       .send(newValues)
-      console.log(response.body)
 
     expect(response.body).toHaveProperty("message")
     expect(response.status).toBe(401)
