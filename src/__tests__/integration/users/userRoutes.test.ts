@@ -1,13 +1,9 @@
 import { DataSource } from "typeorm"
-import AppDataSource from "../../../data-source"
 import request from "supertest"
-import app from "../../../app"
-import {
-  mockedAdmin,
-  mockedAdminLogin,
-  mockedUser,
-  mockedUserLogin,
-} from "../../mocks"
+import AppDataSource from "@/data-source"
+import app from "@/app"
+import { mockedUser, mockedAdmin, mockedAdminLogin, mockedUserLogin, mockedWillBeDeactivatedUser } from "@/__tests__/mocks"
+
 
 describe("/users", () => {
   let connection: DataSource
@@ -120,22 +116,21 @@ describe("/users", () => {
 
   test("DELETE /users/:id -  Must be able to soft delete user", async () => {
     await request(app).post("/users").send(mockedAdmin)
+    const willBeDeactivatedUserResponse = await request(app).post("/users").send(mockedWillBeDeactivatedUser)
 
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
-    const UserTobeDeleted = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
-
+   
     const response = await request(app)
-      .delete(`/users/${UserTobeDeleted.body[0].id}`)
+      .delete(`/users/${willBeDeactivatedUserResponse.body.id}`)
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
     const findUser = await request(app)
       .get("/users")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+
     expect(response.status).toBe(204)
-    expect(findUser.body[0].isActive).toBe(false)
+    expect(findUser.body[2].isActive).toBe(false)
   })
 
   test("DELETE /users/:id -  shouldn't be able to delete user with isActive = false", async () => {
@@ -147,10 +142,10 @@ describe("/users", () => {
     const UserTobeDeleted = await request(app)
       .get("/users")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
-
     const response = await request(app)
-      .delete(`/users/${UserTobeDeleted.body[0].id}`)
+      .delete(`/users/${UserTobeDeleted.body[2].id}`)
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+
     expect(response.status).toBe(400)
     expect(response.body).toHaveProperty("message")
   })
@@ -265,10 +260,9 @@ describe("/users", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("PATCH /users/:id - should not be able to update another user without adm permission", async () => {
-    const newValues = { isActive: false }
-
-    const userLoginResponse = await request(app).post("/login").send(mockedUser)
+  test("PATCH /users/:id - should not be able to update another user without adm permission", async () => {
+    const newValues = { name: "new_name" }
+    const userLoginResponse = await request(app).post("/login").send(mockedUserLogin)
     const admingLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
@@ -278,18 +272,19 @@ describe("/users", () => {
     const userTobeUpdateRequest = await request(app)
       .get("/users")
       .set("Authorization", adminToken)
-    const userTobeUpdateId = userTobeUpdateRequest.body[1].id
 
+      const userTobeUpdateId = userTobeUpdateRequest.body[1].id
     const response = await request(app)
       .patch(`/users/${userTobeUpdateId}`)
       .set("Authorization", userToken)
       .send(newValues)
+      console.log(response.body)
 
     expect(response.body).toHaveProperty("message")
     expect(response.status).toBe(401)
   })
 
-  test.skip("PATCH /users/:id -  should be able to update user", async () => {
+  test("PATCH /users/:id -  should be able to update user", async () => {
     const newValues = { name: "Joana Brito", email: "joanabrito@mail.com" }
 
     const admingLoginResponse = await request(app)

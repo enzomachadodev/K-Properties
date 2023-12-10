@@ -11,6 +11,13 @@ export const mockedUser: IUserCreate = {
   password: "123456",
 }
 
+export const mockedWillBeDeactivatedUser: IUserCreate = {
+  name: "Joao",
+  email: "joao@mail.com",
+  isAdm: false,
+  password: "123456",
+}
+
 export const mockedAdmin: IUserCreate = {
   name: "Felipe",
   email: "felipe@mail.com",
