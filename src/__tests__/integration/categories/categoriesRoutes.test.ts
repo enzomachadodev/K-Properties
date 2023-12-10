@@ -57,7 +57,7 @@ describe("/categories", () => {
     expect(response.status).toBe(409)
   })
 
-  test.skip("POST /categories -  should not be able to create category without authentication", async () => {
+  test("POST /categories -  should not be able to create category without authentication", async () => {
     const response = await request(app).post("/categories").send(mockedCategory)
 
     expect(response.body).toHaveProperty("message")
