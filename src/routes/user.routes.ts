@@ -7,6 +7,7 @@ import {
   verifyAuthMiddleware,
   verifyBodyMiddleware,
   verifyUserEmailMiddleware,
+  verifyOwnerMiddleware,
 } from "@/middlewares";
 import { userCreateSchema, userUpdateSchema } from "@/schemas/user.schema";
 
@@ -28,6 +29,7 @@ userRoutes.patch(
   "/:id",
   verifyAuthMiddleware,
   verifyUserExistsMiddleware,
+  verifyOwnerMiddleware,
   verifyBodyMiddleware(userUpdateSchema),
   userController.update,
 );
