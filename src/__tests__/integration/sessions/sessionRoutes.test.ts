@@ -40,7 +40,7 @@ describe("/login", () => {
     expect(response.status).toBe(403)
   })
 
-  test.skip("POST /login -  should not be able to login with the user with isActive = false", async () => {
+  test("POST /login -  should not be able to login with the user with isActive = false", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
