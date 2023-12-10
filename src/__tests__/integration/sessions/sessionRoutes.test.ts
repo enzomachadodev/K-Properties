@@ -30,7 +30,7 @@ describe("/login", () => {
     expect(response.status).toBe(200)
   })
 
-  test.skip("POST /login -  should not be able to login with the user with incorrect password or email", async () => {
+  test("POST /login -  should not be able to login with the user with incorrect password or email", async () => {
     const response = await request(app).post("/login").send({
       email: "felipe@mail.com",
       password: "1234567",
