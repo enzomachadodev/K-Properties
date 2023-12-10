@@ -44,7 +44,7 @@ describe("/categories", () => {
     expect(response.status).toBe(201)
   })
 
-  test.skip("POST /categories -  should not be able to create category that already exists", async () => {
+  test("POST /categories -  should not be able to create category that already exists", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
