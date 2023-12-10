@@ -1,5 +1,6 @@
 import { categoryController } from "@/controllers";
 import {
+  verifyAdminMiddleware,
   verifyAuthMiddleware,
   verifyCategoryNameMiddleware,
 } from "@/middlewares";
@@ -10,6 +11,7 @@ const categoryRoutes = Router();
 categoryRoutes.post(
   "",
   verifyAuthMiddleware,
+  verifyAdminMiddleware,
   verifyCategoryNameMiddleware,
   categoryController.create,
 );
