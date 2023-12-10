@@ -64,7 +64,7 @@ describe("/categories", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("POST /categories - should not be able to create category not being admin", async () => {
+  test("POST /categories - should not be able to create category not being admin", async () => {
     const userLoginResponse = await request(app)
       .post("/login")
       .send(mockedUserLogin)
