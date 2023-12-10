@@ -77,13 +77,13 @@ describe("/categories", () => {
     expect(response.status).toBe(403)
   })
 
-  test.skip("GET /categories -  Must be able to list all categories", async () => {
+  test("GET /categories -  Must be able to list all categories", async () => {
     const response = await request(app).get("/categories")
     expect(response.body).toHaveLength(1)
     expect(response.status).toBe(200)
   })
 
-  test.skip("GET /categories/:id/properties -  Must be able to list one category properties", async () => {
+  test("GET /categories/:id/properties -  Must be able to list one category properties", async () => {
     const category = await request(app).get("/categories")
     const response = await request(app).get(
       `/categories/${category.body[0].id}/properties`,
