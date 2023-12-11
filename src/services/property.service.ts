@@ -21,12 +21,4 @@ const read = async () => {
   return await propertyRepository.find();
 };
 
-const readByCategoryId = async (categoryId: string) => {
-  const properties = await propertyRepository.findBy({
-    category: { id: categoryId },
-  });
-
-  return properties;
-};
-
-export default { create, read, readByCategoryId };
+export default { create, read };

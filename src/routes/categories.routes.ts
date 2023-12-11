@@ -16,5 +16,9 @@ categoryRoutes.post(
   categoryController.create,
 );
 categoryRoutes.get("", categoryController.read);
+categoryRoutes.get(
+  "/:id/properties",
+  categoryController.readPropertiesByCategoryId,
+);
 
 export default categoryRoutes;

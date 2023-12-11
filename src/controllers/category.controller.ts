@@ -11,4 +11,11 @@ const read = async (req: Request, res: Response) => {
   return res.status(200).json(categories);
 };
 
-export default { create, read };
+const readPropertiesByCategoryId = async (req: Request, res: Response) => {
+  const properties = await categoryService.readPropertiesByCategoryId(
+    req.params.id,
+  );
+  return res.status(200).json(properties);
+};
+
+export default { create, read, readPropertiesByCategoryId };

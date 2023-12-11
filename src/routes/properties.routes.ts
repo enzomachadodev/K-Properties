@@ -5,6 +5,5 @@ const propertyRoutes = Router();
 
 propertyRoutes.post("", propertyController.create);
 propertyRoutes.get("", propertyController.read);
-propertyRoutes.get("/category/:id", propertyController.readByCategoryId);
 
 export default propertyRoutes;

@@ -12,4 +12,21 @@ const read = async () => {
   return categories;
 };
 
-export default { create, read };
+const readPropertiesByCategoryId = async (categoryId: string) => {
+  const properties = await categoryRepository.findOne({
+    where: { id: categoryId },
+    select: {
+      id: true,
+      name: true,
+    },
+    relations: {
+      properties: {
+        address: true,
+      },
+    },
+  });
+
+  return properties;
+};
+
+export default { create, read, readPropertiesByCategoryId };
