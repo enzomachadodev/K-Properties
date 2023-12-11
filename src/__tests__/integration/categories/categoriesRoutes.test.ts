@@ -94,7 +94,7 @@ describe("/categories", () => {
     expect(response.body).toHaveProperty("properties")
   })
 
-  test.skip("GET /categories/:id/properties -  Should not be able to list properties of a category with invalid id", async () => {
+  test("GET /categories/:id/properties -  Should not be able to list properties of a category with invalid id", async () => {
     const response = await request(app).get(
       `/categories/13970660-5dbe-423a-9a9d-5c23b37943cf/properties`,
     )
