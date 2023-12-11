@@ -1,8 +1,12 @@
-import { propertyService } from "@/services";
+import { addressService, propertyService } from "@/services";
 import { Request, Response } from "express";
 
 const create = async (req: Request, res: Response) => {
-  const newProperty = await propertyService.create(req.body);
+  const newAdress = await addressService.create(req.body.address);
+  const newProperty = await propertyService.create({
+    ...req.body,
+    address: newAdress,
+  });
   return res.status(201).json(newProperty);
 };
 
