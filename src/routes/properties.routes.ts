@@ -4,7 +4,9 @@ import {
   verifyAddressMiddleware,
   verifyAdminMiddleware,
   verifyAuthMiddleware,
+  verifyBodyMiddleware,
 } from "@/middlewares";
+import { propertyCreateSchema } from "@/schemas/property.schema";
 
 const propertyRoutes = Router();
 
@@ -12,6 +14,7 @@ propertyRoutes.post(
   "",
   verifyAuthMiddleware,
   verifyAdminMiddleware,
+  verifyBodyMiddleware(propertyCreateSchema),
   verifyAddressMiddleware,
   propertyController.create,
 );
