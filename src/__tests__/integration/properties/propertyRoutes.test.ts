@@ -69,7 +69,7 @@ describe("/properties", () => {
     expect(response.status).toBe(201)
   })
 
-  test.skip("POST /properties -  should not be able to create property that already exists", async () => {
+  test("POST /properties -  should not be able to create property that already exists", async () => {
     const categories = await request(app).get("/categories")
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -79,7 +79,6 @@ describe("/properties", () => {
       .post("/properties")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
       .send(mockedProperty)
-
     expect(response.body).toHaveProperty("message")
     expect(response.status).toBe(409)
   })
