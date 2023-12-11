@@ -107,7 +107,7 @@ describe("/properties", () => {
     expect(response.status).toBe(401)
   })
 
-  test.skip("POST /properties -  should not be able to create property with invalid categoryId", async () => {
+  test("POST /properties -  should not be able to create property with invalid categoryId", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin)
