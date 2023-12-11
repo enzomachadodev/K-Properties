@@ -8,7 +8,7 @@ import verifyUserIsActiveMiddleware from "./verifyUserIsActive.middleware";
 import verifyOwnerMiddleware from "./verifyOwner.middleware";
 import verifyCategoryNameMiddleware from "./verifyCategoryName.middleware";
 import verifyCategoryIdMiddleware from "./verifyCategoryId.middleware";
-
+import verifyAddressMiddleware from "./verifyAddress.middleware";
 export {
   handleError,
   verifyUserEmailMiddleware,
@@ -20,4 +20,5 @@ export {
   verifyOwnerMiddleware,
   verifyCategoryNameMiddleware,
   verifyCategoryIdMiddleware,
+  verifyAddressMiddleware,
 };
