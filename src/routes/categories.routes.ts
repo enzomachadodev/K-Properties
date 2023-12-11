@@ -2,6 +2,7 @@ import { categoryController } from "@/controllers";
 import {
   verifyAdminMiddleware,
   verifyAuthMiddleware,
+  verifyCategoryIdMiddleware,
   verifyCategoryNameMiddleware,
 } from "@/middlewares";
 import { Router } from "express";
@@ -18,6 +19,7 @@ categoryRoutes.post(
 categoryRoutes.get("", categoryController.read);
 categoryRoutes.get(
   "/:id/properties",
+  verifyCategoryIdMiddleware,
   categoryController.readPropertiesByCategoryId,
 );
 

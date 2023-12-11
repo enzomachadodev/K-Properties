@@ -7,6 +7,7 @@ import verifyUserExistsMiddleware from "./verifyUserExists.middleware";
 import verifyUserIsActiveMiddleware from "./verifyUserIsActive.middleware";
 import verifyOwnerMiddleware from "./verifyOwner.middleware";
 import verifyCategoryNameMiddleware from "./verifyCategoryName.middleware";
+import verifyCategoryIdMiddleware from "./verifyCategoryId.middleware";
 
 export {
   handleError,
@@ -18,4 +19,5 @@ export {
   verifyUserExistsMiddleware,
   verifyOwnerMiddleware,
   verifyCategoryNameMiddleware,
+  verifyCategoryIdMiddleware,
 };
