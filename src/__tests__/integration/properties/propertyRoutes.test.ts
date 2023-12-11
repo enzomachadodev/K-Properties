@@ -120,7 +120,7 @@ describe("/properties", () => {
     expect(response.status).toBe(404)
   })
 
-  test.skip("POST /properties -  must not be able to create a property with invalid zipCode", async () => {
+  test("POST /properties -  must not be able to create a property with invalid zipCode", async () => {
     const categories = await request(app).get("/categories")
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -135,7 +135,7 @@ describe("/properties", () => {
     expect(response.status).toBe(400)
   })
 
-  test.skip("POST /properties -  must not be able to create a property with invalid state", async () => {
+  test("POST /properties -  must not be able to create a property with invalid state", async () => {
     const categories = await request(app).get("/categories")
     const adminLoginResponse = await request(app)
       .post("/login")
