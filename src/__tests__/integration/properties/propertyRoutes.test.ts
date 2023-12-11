@@ -83,7 +83,7 @@ describe("/properties", () => {
     expect(response.status).toBe(409)
   })
 
-  test.skip("POST /properties -  should not be able to create property not being admin", async () => {
+  test("POST /properties -  should not be able to create property not being admin", async () => {
     const categories = await request(app).get("/categories")
     const userLoginResponse = await request(app)
       .post("/login")
