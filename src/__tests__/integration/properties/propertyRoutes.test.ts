@@ -150,7 +150,7 @@ describe("/properties", () => {
     expect(response.status).toBe(400)
   })
 
-  test.skip("GET /properties -  Must be able to list all properties", async () => {
+  test("GET /properties -  Must be able to list all properties", async () => {
     const response = await request(app).get("/properties")
     expect(response.body).toHaveLength(1)
     expect(response.status).toBe(200)
