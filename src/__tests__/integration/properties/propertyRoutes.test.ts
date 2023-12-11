@@ -98,7 +98,7 @@ describe("/properties", () => {
     expect(response.status).toBe(403)
   })
 
-  test.skip("POST /properties -  should not be able to create property without authentication", async () => {
+  test("POST /properties -  should not be able to create property without authentication", async () => {
     const categories = await request(app).get("/categories")
     mockedProperty.categoryId = categories.body[0].id
     const response = await request(app).post("/properties").send(mockedProperty)
