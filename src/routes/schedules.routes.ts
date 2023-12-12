@@ -1,9 +1,25 @@
 import { scheduleController } from "@/controllers";
+import {
+  verifyAdminMiddleware,
+  verifyAuthMiddleware,
+  verifyBodyMiddleware,
+} from "@/middlewares";
+import { scheduleCreateSchema } from "@/schemas/schedules.schema";
 import { Router } from "express";
 
 const scheduleRoutes = Router();
 
-scheduleRoutes.post("", scheduleController.create);
-scheduleRoutes.get("/property/:id", scheduleController.readByPropertyId);
+scheduleRoutes.post(
+  "",
+  verifyAuthMiddleware,
+  verifyBodyMiddleware(scheduleCreateSchema),
+  scheduleController.create,
+);
+scheduleRoutes.get(
+  "/properties/:id",
+  verifyAuthMiddleware,
+  verifyAdminMiddleware,
+  scheduleController.readByPropertyId,
+);
 
 export default scheduleRoutes;

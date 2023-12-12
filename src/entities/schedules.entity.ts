@@ -7,11 +7,11 @@ class Schedule {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
-  date: Date;
+  @Column({ type: "date" })
+  date: string;
 
   @Column({ type: "time" })
-  hour: Date;
+  hour: string;
 
   @ManyToOne(() => Property)
   property: Property;
