@@ -119,7 +119,7 @@ export const mockedScheduleInvalidPropertyId: IScheduleCreate = {
 }
 
 export const mockedScheduleInvalidDate: IScheduleCreate = {
-  date: "2022/08/20",
+  date: "2022/08/32",
   hour: "10:30",
   propertyId: "",
   userId: "",
